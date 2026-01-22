@@ -1,0 +1,73 @@
+package base;
+
+
+import java.time.Duration;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class base {
+
+    public static WebDriver driver;
+
+    // ===== BROWSER LAUNCH (ONLY ONCE) =======
+    public static WebDriver Browser_launch() {
+
+        if (driver == null) {   
+            System.setProperty("webdriver.chrome.driver",
+                    "C:\\Users\\kiaq\\eclipse-workspace\\cucumber1\\chrome\\chromedriver.exe");
+
+            driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
+            driver.get("https://www.amazon.in/");
+        }
+        return driver;
+    }
+  //Maximize
+    public static void maximize() {
+        driver.manage().window().maximize();
+    }
+
+    // Implicit Wait 
+    public static void waitimplicit() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+    }
+    // Navigate to URL
+    public static void navigateref(String url) {
+        driver.navigate().to(url);
+    }
+    public void switchToLatestWindow() {
+        for (String window : driver.getWindowHandles()) {
+            driver.switchTo().window(window);
+        }
+    }
+
+    //click
+    public static void click(WebElement element){
+        element.click();
+    }
+    public static void sendkeys(WebElement element,String value){
+        element.clear();
+        element.sendKeys(value);
+    }
+    //scrollup
+
+    public void scrollToElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    // Close Browser
+    public static void close() {
+        driver.close();
+    }
+
+    //  Quit Browser
+    public static void quit() {
+        driver.quit();
+    }
+    }
+
