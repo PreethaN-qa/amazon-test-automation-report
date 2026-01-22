@@ -1,0 +1,53 @@
+Scenario Outline: Login to Amazon                                    # src/test/java/feature/ama.feature:10
+  ✔ When User clicks sign in                                         # stepdefinition.stepdd.user_clicks_sign_in()
+  ✔ And User enters username "8610966352" and password "password123" # stepdefinition.stepdd.user_enters_username_and_password(java.lang.String,java.lang.String)
+User login successfully
+  ✔ Then User should login successfully                              # stepdefinition.stepdd.user_should_login_successfully()
+
+Scenario Outline: Product search and add to cart # src/test/java/feature/ama.feature:22
+  ✔ Given User is on product page                # stepdefinition.stepdd.user_is_on_product_page()
+  ✔ When User searches product "iphone 15"       # stepdefinition.stepdd.user_searches_product(java.lang.String)
+  ✔ And User selects first product               # stepdefinition.stepdd.user_selects_first_product()
+product added  successfully
+  ✔ Then Product added to cart successfully      # stepdefinition.stepdd.product_added_to_cart_successfully()
+
+Scenario: Proceed to payment           # src/test/java/feature/ama.feature:26
+  ✔ When User navigates to cart        # stepdefinition.stepdd.user_navigates_to_cart()
+  ✔ And User clicks proceed to buy     # stepdefinition.stepdd.user_clicks_proceed_to_buy()
+  ✔ And User selects delivery address  # stepdefinition.stepdd.user_selects_delivery_address()
+user is on payment page successfully
+  ✔ Then User proceeds to payment page # stepdefinition.stepdd.user_proceeds_to_payment_page()
+
+Scenario: Add new delivery address                                                              # src/test/java/feature/ama.feature:42
+user is on delivery address page
+  ✔ When User goes back to delivery address page                                                # stepdefinition.stepdd.user_goes_back_to_delivery_address_page()
+  ✔ And User clicks change address                                                              # stepdefinition.stepdd.User_clicks_change_ddress()
+  ✔ And User adds new address with "Preeth" "8610966352" "600001" "Anna Nagar, Block" "Chennai" # stepdefinition.stepdd.user_adds_new_address_with(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+New delivery address added successfully
+  ✔ Then Address should be saved successfull                                                    # stepdefinition.stepdd.Address_should_be_saved_successfull()
+
+Scenario: Edit existing delivery address                                        # src/test/java/feature/ama.feature:54
+  ✔ When User goes back to  edit delivery address page                          # stepdefinition.stepdd.user_goes_back_to_edit_delivery_address_page()
+  ✔ And User clicks change address                                              # stepdefinition.stepdd.User_clicks_change_ddress()
+  ✔ And User edit address                                                       # stepdefinition.stepdd.User_edit_address()
+  ✔ And User edits address with "aaaaaaaa" "0000000000" "111111" "Test Invalid" # stepdefinition.stepdd.user_edits_address_with(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+New delivery address added successfully
+  ✔ Then Address should be saved successfull                                    # stepdefinition.stepdd.Address_should_be_saved_successfull()
+
+Scenario Outline: Invalid product search        # src/test/java/feature/ama.feature:66
+  ✔ When User navigates back five times         # stepdefinition.stepdd.user_navigates_back_five_times()
+  ✔ Given User is on product page               # stepdefinition.stepdd.user_is_on_product_page()
+  ✔ When User searches product "abcdefr521"     # stepdefinition.stepdd.user_searches_product(java.lang.String)
+No results found for invalid product search
+  ✔ Then No results message should be displayed # stepdefinition.stepdd.no_results_message_should_be_displayed()
+
+Scenario: Logout from Amazon                    # src/test/java/feature/ama.feature:70
+  ✔ When User logs out                          # stepdefinition.stepdd.User_logs_out()
+user logged out successfully
+  ✔ Then User should be logged out successfully # stepdefinition.stepdd.User_should_be_logged_out_successfully()
+
+Scenario Outline: Login with invalid email id                                # src/test/java/feature/ama.feature:82
+  ✔ When User clicks sign in                                                 # stepdefinition.stepdd.user_clicks_sign_in()
+  ✔ And User enters invalid username "86109663521" and password "password12" # stepdefinition.stepdd.user_enters_invalid_username_and_password(java.lang.String,java.lang.String)
+Invalid email / login error message displayed successfully
+  ✔ Then Error message should be displayed                                   # stepdefinition.stepdd.error_message_should_be_displayed()
