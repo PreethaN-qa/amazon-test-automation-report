@@ -1,0 +1,83 @@
+Feature: Amazon Purchase Flow 
+
+ Scenario Outline: Login to Amazon
+    When User clicks sign in
+    And User enters username "<Emailid>" and password "<Password>"
+    Then User should login successfully
+
+    Examples:
+      | Emailid    | Password    |
+      | 8610966352 | password123 |
+
+
+  
+ Scenario Outline: Product search and add to cart
+    Given User is on product page
+    When User searches product "<ProductName>"
+    And User selects first product
+    Then Product added to cart successfully
+
+    Examples:
+      | ProductName |
+      | iphone 15   |
+
+
+  
+ Scenario: Proceed to payment
+    When User navigates to cart
+    And User clicks proceed to buy
+    And User selects delivery address
+    Then User proceeds to payment page
+
+
+  
+ Scenario: Add new delivery address
+    When User goes back to delivery address page
+    And    User clicks change address
+    And    User adds new address with "<Name>" "<Mobile>" "<Pincode>" "<Address>" "<City>"
+    Then   Address should be saved successfull
+
+Examples:
+   | Emailid                    | Name     | Mobile      | Pincode | Address           | City     |
+   | 8610966352                 | Preeth | 8610966352  | 600001  | Anna Nagar, Block | Chennai   |
+   
+ 
+ Scenario:  Edit existing delivery address
+    When   User goes back to  edit delivery address page
+    And    User clicks change address
+    And User edit address
+    And User edits address with "<InvalidName>" "<InvalidMobile>" "<InvalidPincode>" "<InvalidAddress>"
+    Then   Address should be saved successfull
+
+Examples:
+| EmailId     | Password     | InvalidName | InvalidMobile | InvalidPincode | InvalidAddress |
+| 8610966352  | password123 | aaaaaaaa    | 0000000000   | 111111         | Test Invalid   |
+
+
+
+ 
+Scenario Outline: Invalid product search
+  When User navigates back five times
+   Given User is on product page
+  When User searches product "<ProductName>"
+  Then No results message should be displayed
+   Examples:
+  |   ProductName     | 
+  |   abcdefr521      |
+  
+  
+  
+Scenario: Logout from Amazon
+  When User logs out
+  Then User should be logged out successfully
+ 
+   
+ Scenario Outline: Login with invalid email id
+  When User clicks sign in
+  And User enters invalid username "<EmailId>" and password "<Password>"
+  Then Error message should be displayed
+
+Examples:
+  | EmailId        | Password   |
+  | 86109663521    | password12 |
+    
