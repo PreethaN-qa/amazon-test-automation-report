@@ -1,0 +1,225 @@
+package pom;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class pomclass {
+
+    WebDriver driver;
+
+    // Constructor
+    public pomclass(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    //  Sign In 
+
+    @FindBy(id = "nav-link-accountList")
+    private WebElement signinButton;
+
+    @FindBy(id="ap_email_login")
+    private WebElement emailId;
+
+    @FindBy(id="continue")
+    private WebElement continueButton;
+
+    @FindBy(id="cvf-input-code")
+    private WebElement password;
+
+    @FindBy(id="signInSubmit")
+    private WebElement loginButton;
+
+    // Getters
+    public WebElement getSigninButton() {
+        return signinButton;
+    }
+
+    public WebElement getEmailId() {
+        return emailId;
+    }
+
+    public WebElement getContinueButton() {
+        return continueButton;
+    }
+
+    public WebElement getPassword() {
+        return password;
+    }
+
+    public WebElement getLoginButton() {
+        return loginButton;
+    }
+
+    //  Product Search 
+
+    @FindBy(id = "twotabsearchtextbox")
+    private WebElement productSearch;
+
+    @FindBy(id = "nav-search-submit-button")
+    private WebElement submitProduct;
+
+    @FindBy(xpath = "//div[@class='s-widget-s-spacing-small s-widget-container-height-small celwidget slot=MAIN template=SEARCH_RESULTS widgetId=search-results_1']//div[@class='a-section aok-relative s-image-fixed-height']")
+    private WebElement firstProduct;
+
+    @FindBy(xpath = "//span[@class='nav-line-2'][normalize-space add()='Cart']")
+    private WebElement addToCart;
+
+    // Getters
+    public WebElement getProductSearch() {
+        return productSearch;
+    }
+
+    public WebElement getSubmitProduct() {
+        return submitProduct;
+    }
+
+    public WebElement getFirstProduct() {
+        return firstProduct;
+    }
+
+    public WebElement getAddToCart() {
+        return addToCart;
+    }
+ //  Proceed to Pay 
+
+ // Cart button
+ @FindBy(xpath = "//label[@for='sc-buy-box-cart-checkbox']")
+ private WebElement cartButton;
+
+ // Proceed to Buy
+ @FindBy(xpath = "//input[@name='proceedToRetailCheckout']")
+ private WebElement proceedToBuy;
+
+ // Deliver to this address
+ @FindBy(xpath = "//p[@class='a-spacing-none']")
+ private WebElement deliverAddress;
+
+ // Continue payment
+ @FindBy(xpath = "//span[@id='primary-continue-button-id']//input[@type='submit']")
+ private WebElement continuePayment;
+
+
+ //  Getters 
+ public WebElement getCartButton() {
+     return cartButton;
+ }
+
+ public WebElement getProceedToBuy() {
+     return proceedToBuy;
+ }
+
+ public WebElement getDeliverAddress() {
+     return deliverAddress;
+ }
+
+ public WebElement getContinuePayment() {
+     return continuePayment;
+ }
+ 
+ //invalid emailid error
+ @FindBy(id="continue")
+ private WebElement loginError;
+
+ public WebElement getLoginError() {
+     return loginError;
+ }
+//Add new address button
+ 
+ @FindBy(xpath = "//span[[normalize-space()='Cart']")
+ private WebElement CartIconButton;
+  
+ @FindBy(xpath = "//a[normalize-space()='Change']")
+ private WebElement ChangeAddress;
+ 
+ 
+@FindBy(xpath = "//a[@id='add-new-address-desktop-sasp-tango-link']")
+private WebElement addNewAddress;
+
+//Full name
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressFullName']")
+private WebElement fullName;
+
+//Mobile number
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressPhoneNumber']")
+private WebElement mobileNumber;
+
+//Pincode
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressPostalCode']")
+private WebElement pinCode;
+
+//Address line 1
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressLine1']")
+private WebElement addressLine1;
+//address line2
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressLine2']")
+private WebElement addressLine2;
+//landmark
+@FindBy(xpath = "//input[@id='address-ui-widgets-landmark']")
+private WebElement landmark;
+
+//City
+@FindBy(xpath = "//input[@id='address-ui-widgets-enterAddressCity']")
+private WebElement city;
+
+//editaddress
+@FindBy(xpath = "//a[@id='edit-address-desktop-tango-sasp-1']")
+private WebElement editaddress;
+
+//Save address button
+@FindBy(xpath = "//span[@data-checkout-continue-button-click-action='{\"showTransition\":false}']//input[@type='submit']")
+private WebElement saveAddress;
+
+//-------- GETTERS --------
+
+public WebElement getCartIconButton() {
+    return CartIconButton;
+}
+
+public WebElement getChangeAddress() {
+    return ChangeAddress;
+}
+
+
+public WebElement getAddNewAddress() {
+  return addNewAddress;
+}
+
+public WebElement getFullName() {
+  return fullName;
+}
+
+public WebElement getMobileNumber() {
+  return mobileNumber;
+}
+
+public WebElement getPinCode() {
+  return pinCode;
+}
+
+public WebElement getAddressLine1() {
+  return addressLine1;
+}
+
+public WebElement getCity() {
+  return city;
+}
+public WebElement getaddressLine2() {
+	  return addressLine2;
+	}
+
+public WebElement getlandmark() {
+	  return landmark;
+	}
+
+public WebElement geteditaddress() {
+	  return editaddress;
+	}
+public WebElement getSaveAddress() {
+  return saveAddress;
+}
+
+
+}
