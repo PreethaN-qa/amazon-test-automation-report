@@ -1,0 +1,221 @@
+package stepdefinition;
+
+import base.base;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pom.pom;
+
+
+public class stepdd extends base {
+
+    pom ap = new pom(driver);
+    static boolean isLoggedIn = false;   // 🔥 KEY LINE
+
+    @When("User clicks sign in")
+    public void user_clicks_sign_in() throws InterruptedException {
+
+        if (!isLoggedIn) {
+            Thread.sleep(3000);
+            click(ap.getSigninButton());
+        }
+    }
+
+    @And("User enters username {string} and password {string}")
+    public void user_enters_username_and_password(String email, String password)
+            throws InterruptedException {
+
+        if (!isLoggedIn) {
+            sendkeys(ap.getEmailId(), email);
+            click(ap.getContinueButton());
+            Thread.sleep(3000);
+        }
+    }
+
+    @Then("User should login successfully")
+    public void user_should_login_successfully() throws InterruptedException {
+
+        if (!isLoggedIn) {
+            Thread.sleep(10000);
+            click(ap.getLoginButton());
+            isLoggedIn = true;   
+            System.out.println("User login successfully");
+        }
+    }
+
+    // ================= PRODUCT PAGE =================
+
+    @Given("User is on product page")
+    public void user_is_on_product_page() {
+        waitimplicit();
+        click(ap.getProductSearch());
+    }
+    @When("User searches product {string}")
+    public void user_searches_product(String productName) {
+        sendkeys(ap.getProductSearch(), productName);
+        click(ap.getSubmitProduct());
+    }
+
+    @And("User selects first product")
+    public void user_selects_first_product() {
+        click(ap.getFirstProduct());
+    }
+
+    @Then("Product added to cart successfully")
+    public void product_added_to_cart_successfully() throws InterruptedException    {
+    	Thread.sleep(10000);
+    	 switchToLatestWindow();
+        click(ap.getAddToCart());
+        System.out.println("product added  successfully");
+    }
+ 
+
+ //  Proceed to Pay 
+
+    @When("User navigates to cart")
+    public void user_navigates_to_cart() {
+        click(ap.getCartButton());
+    }
+
+    @And("User clicks proceed to buy")
+    public void user_clicks_proceed_to_buy() {
+        click(ap.getProceedToBuy());
+    }
+
+    @And("User selects delivery address")
+    public void user_selects_delivery_address() throws InterruptedException {
+        Thread.sleep(3000);
+        click(ap.getDeliverAddress());
+    }
+
+    @Then("User proceeds to payment page")
+    public void user_proceeds_to_payment_page() throws InterruptedException {
+        Thread.sleep(3000);
+        click(ap.getContinuePayment());
+        System.out.println("user is on payment page successfully");
+        
+    }
+    //new delivery address
+    @When("User goes back to delivery address page")
+    public void user_goes_back_to_delivery_address_page() {
+    
+    	System.out.println("user is on delivery address page");
+    }
+    
+    @When("User goes back to  edit delivery address page")
+    public void user_goes_back_to_edit_delivery_address_page() {
+        driver.navigate().back();
+    } 
+    
+    @And("User clicks change address")
+    public void User_clicks_change_ddress() throws InterruptedException {
+        Thread.sleep(3000);
+        click(ap.getChangeAddress());
+    } 
+    
+    @And("User adds new address with {string} {string} {string} {string} {string}")
+    public void user_adds_new_address_with(String name, String mobile, String pincode,
+                                           String address, String city) throws InterruptedException {
+
+        Thread.sleep(3000);
+        click(ap.getAddNewAddress());
+        Thread.sleep(3000);
+        sendkeys(ap.getFullName(), name);
+        Thread.sleep(3000);
+        sendkeys(ap.getMobileNumber(), mobile);
+        Thread.sleep(3000);
+        sendkeys(ap.getPinCode(), pincode);
+        Thread.sleep(3000);
+        sendkeys(ap.getAddressLine1(), address);
+        Thread.sleep(3000);
+        sendkeys(ap.getCity(), city);
+    }
+    
+   
+    
+    
+    @Then ("Address should be saved successfull")
+    public void Address_should_be_saved_successfull()throws InterruptedException {
+    	Thread.sleep(25000);
+        click(ap.getSaveAddress());
+
+        System.out.println("New delivery address added successfully");
+    }
+    //edit address
+    @And("User edit address")
+    public void User_edit_address() throws InterruptedException {
+        Thread.sleep(3000);
+        click(ap.geteditaddress());
+    } 
+    @And("User edits address with {string} {string} {string} {string}")
+    public void user_edits_address_with(String name,String mobile,String pincode,String address)
+            throws InterruptedException {
+
+        Thread.sleep(3000);
+
+        ap.getFullName().clear();
+        ap.getMobileNumber().clear();
+        ap.getAddressLine1().clear();
+        ap.getPinCode().clear();
+
+        sendkeys(ap.getFullName(), name);
+        Thread.sleep(2000);
+        
+        sendkeys(ap.getMobileNumber(), mobile);
+        Thread.sleep(2000);
+       
+        sendkeys(ap.getPinCode(), pincode);
+        Thread.sleep(2000);
+        
+        sendkeys(ap.getAddressLine1(), address);
+        Thread.sleep(2000);
+        
+        sendkeys(ap.getPinCode(), pincode);
+        Thread.sleep(2000);
+
+    } 
+    //invalid product search
+    @When("User navigates back five times")
+    public void user_navigates_back_five_times() throws InterruptedException {
+
+        for (int i = 1; i <= 5; i++) {
+            driver.navigate().back();
+            Thread.sleep(5000); 
+        }
+    
+    }
+   
+    @Then("No results message should be displayed")
+    public void no_results_message_should_be_displayed() {
+    	 click(ap.getProductSearch());
+        System.out.println("No results found for invalid product search");
+    }
+    
+ //invalid emailid
+    
+    @And("User enters invalid username {string} and password {string}")
+    public void user_enters_invalid_username_and_password(String email, String password) throws InterruptedException {
+    	
+    	 ap.getEmailId().clear();
+    	 Thread.sleep(3000); 
+        sendkeys(ap.getEmailId(), email);
+    }
+
+    @Then("Error message should be displayed")
+    public void error_message_should_be_displayed() throws InterruptedException {
+    	Thread.sleep(3000);
+    	click(ap.getContinueButton());
+    	System.out.println("Invalid email / login error message displayed successfully");
+    }
+  //logout functionality
+   @ When("User logs out")
+   public void  User_logs_out() throws InterruptedException {
+	   driver.get("https://www.amazon.in/gp/flex/sign-out.html");
+	}
+
+   @Then ("User should be logged out successfully")
+   public void  User_should_be_logged_out_successfully() throws InterruptedException {
+	    System.out.println("user logged out successfully");
+}
+}
