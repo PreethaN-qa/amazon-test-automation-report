@@ -11,7 +11,7 @@ import pom.pom;
 public class stepdd extends base {
 
     pom ap = new pom(driver);
-    static boolean isLoggedIn = false;   // 🔥 KEY LINE
+    static boolean isLoggedIn = false;   
 
     @When("User clicks sign in")
     public void user_clicks_sign_in() throws InterruptedException {
